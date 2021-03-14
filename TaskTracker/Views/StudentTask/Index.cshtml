@@ -1,0 +1,44 @@
+﻿@using TaskTracker.Models
+@model List<StudentTask>
+
+<h1>Student Tasks</h1>
+
+<p>
+    <a asp-controller="StudentTask" asp-action="Add">Add Student Task</a>
+</p>
+
+<p>
+    <a asp-controller="StudentTask" asp-action="Delete">Delete Student Task</a>
+</p>
+
+@if (Model.Count == 0)
+{
+    <p>No events yet!</p>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                ID
+            </th>
+
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+        </tr>
+        @foreach (var studentTask in Model)
+        {
+            <tr>
+                <td>@studentTask.Id</td>
+                <td>@studentTask.Name</td>
+                <td>@studentTask.Description</td>
+            </tr>
+        }
+
+    </table>
+}
+
