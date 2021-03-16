@@ -1,0 +1,39 @@
+﻿@using TaskTracker.ViewModels
+@model TaskTracker.ViewModels.DetailStudentTaskViewModel
+
+
+<table class="table table-bordered">
+
+    <tr>
+        <th>Name</th>
+        <td>@Model.Name</td>
+    </tr>
+
+    <tr>
+        <th>Description</th>
+        <td>@Model.Description</td>
+    </tr>
+    <tr>
+        <th>Due Date</th>
+        <td>@Model.DueDate</td>
+    </tr>
+    <tr>
+        <th>Date Submitted</th>
+        <td>@Model.SubmitDate</td>
+    </tr>
+    <tr>
+        <th>Date Approved</th>
+        <td>@Model.ApproveDate</td>
+    </tr>
+    <tr>
+        <th>Approved</th>
+        <td>@Model.Approved</td>
+    </tr>
+</table>
+<p>
+    <a asp-controller="StudentTask" asp-action="Add">Add Student Task</a>
+</p>
+
+<p>
+    <a asp-controller="StudentTask" asp-action="Delete">Delete Student Task</a>
+</p>

@@ -10,6 +10,13 @@ namespace TaskTracker.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
+        public DateTime DueDate { get; set; }
+        public DateTime SubmitDate { get; set; }
+        public DateTime ApproveDate { get; set; }
+
+        public Boolean Approved { get; set; }
+
+
         public int Id { get; set; }
         private static int nextId = 1;
 
@@ -19,10 +26,11 @@ namespace TaskTracker.Models
             nextId++;
         }
         
-        public StudentTask(string name, string description) : this()
+        public StudentTask(string name, string description, DateTime dueDate) : this()
         {
             this.Name = name;
             this.Description = description;
+            this.DueDate = dueDate;
         }
 
         public override string ToString()

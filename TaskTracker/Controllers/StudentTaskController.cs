@@ -37,7 +37,8 @@ namespace TaskTracker.Controllers
             StudentTask newStudentTask = new StudentTask
             {
                 Name = addStudentTaskViewModel.Name,
-                Description = addStudentTaskViewModel.Description
+                Description = addStudentTaskViewModel.Description,
+                DueDate = addStudentTaskViewModel.DueDate
             };
             StudentTaskData.Add(newStudentTask);
             return Redirect("/StudentTask");
@@ -60,5 +61,11 @@ namespace TaskTracker.Controllers
 
             return Redirect("/StudentTask");
         }
+
+        //public IActionResult Detail()
+        //{
+        //    DetailStudentTaskViewModel detailStudentTaskViewModel = new DetailStudentTaskViewModel(StudentTaskData.GetById(1));
+        //    return View();
+        //}
     }
 }
