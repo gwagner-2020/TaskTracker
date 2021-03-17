@@ -12,6 +12,12 @@ namespace TaskTracker.Controllers
     public class StudentTaskController : Controller
     {
         //static private List<StudentTask> studentTasks = new List<StudentTask>();
+        private StudentTaskDbContext context;
+
+        public StudentTaskController(StudentTaskDbContext dbContext)
+        {
+            context = dbContext;
+        }
         
         [HttpGet]
         public IActionResult Index()
@@ -19,7 +25,8 @@ namespace TaskTracker.Controllers
             //studentTasks.Add("Clean Desk");
             //studentTasks.Add("Monitor Gallery");
             //ViewBag.studentTasks = StudentTaskData.GetAll();
-            List<StudentTask> studentTasks = new List<StudentTask>(StudentTaskData.GetAll());
+            //List<StudentTask> studentTasks = new List<StudentTask>(StudentTaskData.GetAll());
+            List<StudentTask> studentTasks = context.StudentTasks.ToList();
 
             return View(studentTasks);
         }
@@ -40,14 +47,19 @@ namespace TaskTracker.Controllers
                 Description = addStudentTaskViewModel.Description,
                 DueDate = addStudentTaskViewModel.DueDate
             };
-            StudentTaskData.Add(newStudentTask);
+            //StudentTaskData.Add(newStudentTask);
+            //New two lines store to persistent database
+            context.StudentTasks.Add(newStudentTask);
+            context.SaveChanges();
+
             return Redirect("/StudentTask");
         }
 
         [HttpGet]
         public IActionResult Delete()
         {
-            ViewBag.studentTasks = StudentTaskData.GetAll();
+            //ViewBag.studentTasks = StudentTaskData.GetAll();
+            ViewBag.studentTasks = context.StudentTasks.ToList();
             return View();
         }
 
@@ -56,8 +68,11 @@ namespace TaskTracker.Controllers
         {
             foreach(int studentTaskId in studentTaskIds)
             {
-                StudentTaskData.Remove(studentTaskId);
+                //StudentTaskData.Remove(studentTaskId);
+                StudentTask theStudentTask = context.StudentTasks.Find(studentTaskId);
+                context.StudentTasks.Remove(theStudentTask);
             }
+            context.SaveChanges();
 
             return Redirect("/StudentTask");
         }
