@@ -1,0 +1,7 @@
+This application helps supervisors and students organize and complete required tasks seamlessly and effectively. Using authenticated user accounts, the application allows supervisors to tailor a flexible task list for each student. The supervisor can create tasks and add/remove them to/from the student’s task list. Students can mark tasks complete, stamp them with a date and time, and provide feedback. Sorting features make it possible to review tasks and their completion dates. To help motivate students, a “surprise” design element appears once a task is marked completed. The application records, quantifies, and incentivizes accomplished work, which helps supervisors, students, and the school create a more effective and satisfying work experience.
+
+Features
+• Supervisors and students can create and authenticate accounts. • Supervisors can use CRUD functionality for managing task list. • Students can enter whether task is complete, date/time stamp when task completed, record how long it took to complete task, and add comments/feedback. • Supervisors and students can search all tasks. • Supervisors and students can sort tasks by date/time to track frequency and need of completion.
+
+Technologies
+• C# • .NET • mySQL • Bootstrap
