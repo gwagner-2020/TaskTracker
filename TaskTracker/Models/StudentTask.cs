@@ -18,15 +18,15 @@ namespace TaskTracker.Models
 
 
         public int Id { get; set; }
-        private static int nextId = 1;
+        //private static int nextId = 1;
 
         public StudentTask()
         {
-            Id = nextId;
-            nextId++;
+            //Id = nextId;
+            //nextId++;
         }
         
-        public StudentTask(string name, string description, DateTime dueDate) : this()
+        public StudentTask(string name, string description, DateTime dueDate) //: this()
         {
             this.Name = name;
             this.Description = description;
