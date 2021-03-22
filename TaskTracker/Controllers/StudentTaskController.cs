@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,20 +16,27 @@ namespace TaskTracker.Controllers
     {
         //static private List<StudentTask> studentTasks = new List<StudentTask>();
         private StudentTaskDbContext context;
+        private IAuthorizationService authorizationService;
+        private UserManager<IdentityUser> userManager;
 
-        public StudentTaskController(StudentTaskDbContext dbContext)
+        public StudentTaskController(StudentTaskDbContext dbContext, IAuthorizationService authorizationService, UserManager<IdentityUser> userManager) : base()
         {
             context = dbContext;
+            this.authorizationService = authorizationService;
+            this.userManager = userManager;
         }
         
         [HttpGet]
         public IActionResult Index()
         {
-            //studentTasks.Add("Clean Desk");
+            var currentUserId = userManager.GetUserId(User);
+;            //studentTasks.Add("Clean Desk");
             //studentTasks.Add("Monitor Gallery");
             //ViewBag.studentTasks = StudentTaskData.GetAll();
             //List<StudentTask> studentTasks = new List<StudentTask>(StudentTaskData.GetAll());
-            List<StudentTask> studentTasks = context.StudentTasks.ToList();
+            List<StudentTask> studentTasks = context.StudentTasks
+                .Where(e => e.UserId == currentUserId)
+                .ToList();
 
             return View(studentTasks);
         }
@@ -43,11 +51,14 @@ namespace TaskTracker.Controllers
         [HttpPost]
         public IActionResult Add(AddStudentTaskViewModel addStudentTaskViewModel)
         {
+            var currentUserId = userManager.GetUserId(User);
+            
             StudentTask newStudentTask = new StudentTask
             {
                 Name = addStudentTaskViewModel.Name,
                 Description = addStudentTaskViewModel.Description,
-                DueDate = addStudentTaskViewModel.DueDate
+                DueDate = addStudentTaskViewModel.DueDate,
+                UserId = currentUserId
             };
             //StudentTaskData.Add(newStudentTask);
             //New two lines store to persistent database
