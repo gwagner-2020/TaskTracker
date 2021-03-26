@@ -72,8 +72,14 @@ namespace TaskTracker.Controllers
         public IActionResult Delete()
         {
             //ViewBag.studentTasks = StudentTaskData.GetAll();
-            ViewBag.studentTasks = context.StudentTasks.ToList();
-            return View();
+            //ViewBag.studentTasks = context.StudentTasks.ToList();
+            //return View();
+            var currentUserId = userManager.GetUserId(User);
+            List<StudentTask> studentTasks = context.StudentTasks
+                .Where(e => e.UserId == currentUserId)
+                .ToList();
+
+            return View(studentTasks);
         }
 
         [HttpPost]

@@ -1,8 +1,14 @@
-﻿<h1>Delete Student Task</h1>
+﻿@using TaskTracker.Models
+@model List<StudentTask>
+
+<h1>Delete Student Task</h1>
 
 <form method="post">
-    @foreach (var studentTask in ViewBag.studentTasks)
+    @foreach (var studentTask in Model)
     {
+    
+
+
 
     <div class="form-group">
         <label>
@@ -12,6 +18,6 @@
     </div>
     }
 
-    <input type="submit" name="Delete Selected Tasks" class="btn btn-danger"/>
+    <input type="submit" name="Delete Selected Tasks" class="btn btn-danger" />
 
 </form>
