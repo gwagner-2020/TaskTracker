@@ -29,6 +29,7 @@ namespace TaskTracker
             services.AddDbContext<StudentTaskDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<StudentTaskDbContext>();
             services.AddRazorPages();
 
