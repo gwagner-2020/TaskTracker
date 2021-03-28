@@ -15,8 +15,8 @@ namespace TaskTracker.Models
         public DateTime ApproveDate { get; set; }
 
         public Boolean Approved { get; set; }
-
-
+        
+        public string UserId { get; set; }
         public int Id { get; set; }
         //private static int nextId = 1;
 
