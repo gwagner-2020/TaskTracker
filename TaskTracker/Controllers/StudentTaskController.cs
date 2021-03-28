@@ -42,6 +42,7 @@ namespace TaskTracker.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Add()
         {
             AddStudentTaskViewModel addStudentTaskViewModel = new AddStudentTaskViewModel();
