@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,5 +50,17 @@ namespace TaskTracker.Controllers
             return View("Add", studentTag);
         }
 
-    }  
+        public IActionResult Detail(int id)
+        {
+            List<TaskTag> taskTags = context.TaskTags
+                .Where(et => et.StudentTagId == id)
+                .Include(et => et.StudentTask)
+                .Include(et => et.StudentTag)
+                .ToList();
+
+            return View(taskTags);
+        }
+
+
+    }
 }
