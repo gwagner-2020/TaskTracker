@@ -1,0 +1,13 @@
+﻿@using TaskTracker.Models
+
+@model StudentTag
+
+<h1>Add Student Tag</h1>
+
+<form method="post">
+    <div asp-controller="StudentTag" asp-action="Add" class="form-group">
+        <label asp-for="StudentName">Student Name</label>
+        <input asp-for="StudentName" />
+    </div>
+    <input type="submit" value="Add Student Tag" />
+</form>

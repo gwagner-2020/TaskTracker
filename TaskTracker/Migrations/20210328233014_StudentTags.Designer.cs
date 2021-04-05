@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskTracker.Data;
 
 namespace TaskTracker.Migrations
 {
     [DbContext(typeof(StudentTaskDbContext))]
-    partial class StudentTaskDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210328233014_StudentTags")]
+    partial class StudentTags
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -220,7 +222,9 @@ namespace TaskTracker.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("StudentName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .IsRequired()
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -257,21 +261,6 @@ namespace TaskTracker.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("StudentTasks");
-                });
-
-            modelBuilder.Entity("TaskTracker.Models.TaskTag", b =>
-                {
-                    b.Property<int>("StudentTaskId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentTagId")
-                        .HasColumnType("int");
-
-                    b.HasKey("StudentTaskId", "StudentTagId");
-
-                    b.HasIndex("StudentTagId");
-
-                    b.ToTable("TaskTags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -321,21 +310,6 @@ namespace TaskTracker.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("TaskTracker.Models.TaskTag", b =>
-                {
-                    b.HasOne("TaskTracker.Models.StudentTag", "StudentTag")
-                        .WithMany()
-                        .HasForeignKey("StudentTagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TaskTracker.Models.StudentTask", "StudentTask")
-                        .WithMany()
-                        .HasForeignKey("StudentTaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

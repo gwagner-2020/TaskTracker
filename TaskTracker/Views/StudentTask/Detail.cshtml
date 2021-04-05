@@ -29,11 +29,20 @@
         <th>Approved</th>
         <td>@Model.Approved</td>
     </tr>
+    @*<tr>
+        <th>Students Assigned</th>
+        <td>@Model.StudentNamesText</td>
+    </tr>*@
 </table>
 <p>
+    <a asp-controller="StudentTask" asp-action="AddStudentTag" asp-route-id="@Model.TaskId">Assign Student To Task</a>
+</p>
+
+
+@*<p>
     <a asp-controller="StudentTask" asp-action="Add">Add Student Task</a>
 </p>
 
 <p>
     <a asp-controller="StudentTask" asp-action="Delete">Delete Student Task</a>
-</p>
+</p>*@

@@ -18,6 +18,8 @@ namespace TaskTracker.ViewModels
 
         public Boolean Approved { get; set; }
 
+        //public string StudentNamesText { get; set; }
+
         public DetailStudentTaskViewModel(StudentTask studentTask)
         {
             this.TaskId = studentTask.Id;
@@ -27,6 +29,19 @@ namespace TaskTracker.ViewModels
             this.SubmitDate = studentTask.SubmitDate;
             this.ApproveDate = studentTask.ApproveDate;
             this.Approved = studentTask.Approved;
+
+            //this.StudentNamesText = "";
+
+            //for (var i = 0; i < taskTags.Count; i++)
+            //{
+            //    StudentNamesText += taskTags[i].StudentTag.StudentName;
+
+            //    if (i < taskTags.Count - 1)
+            //    {
+            //        StudentNamesText += ", ";
+            //    }
+
+            //}
         }
     }
 }

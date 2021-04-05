@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskTracker.Data;
 
 namespace TaskTracker.Migrations
 {
     [DbContext(typeof(StudentTaskDbContext))]
-    partial class StudentTaskDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210329225907_AddTaskTag")]
+    partial class AddTaskTag
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

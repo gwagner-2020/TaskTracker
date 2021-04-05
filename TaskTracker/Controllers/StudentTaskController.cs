@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,7 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Add(AddStudentTaskViewModel addStudentTaskViewModel)
         {
             var currentUserId = userManager.GetUserId(User);
@@ -97,10 +99,60 @@ namespace TaskTracker.Controllers
             return Redirect("/StudentTask");
         }
 
-        //public IActionResult Detail()
-        //{
-        //    DetailStudentTaskViewModel detailStudentTaskViewModel = new DetailStudentTaskViewModel(StudentTaskData.GetById(1));
-        //    return View();
-        //}
+        public IActionResult Detail(int id)
+        {
+            StudentTask theStudentTask = context.StudentTasks.Single(e => e.Id == id);
+
+            //List<TaskTag> studentNamesText = context.TaskTags
+            //    .Where(et => et.StudentTaskId == id)
+            //    .Include(et => et.StudentTag)
+            //    .ToList();
+
+            DetailStudentTaskViewModel viewModel = new DetailStudentTaskViewModel(theStudentTask);
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult AddStudentTag(int id)
+        {
+            StudentTask studentTask = context.StudentTasks.Find(id);
+            List<StudentTag> possibleTags = context.StudentTags.ToList();
+
+            AddTaskTagViewModel viewModel = new AddTaskTagViewModel(studentTask, possibleTags);
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult AddStudentTag(AddTaskTagViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                int studentTaskId = viewModel.StudentTaskId;
+                int studentTagId = viewModel.StudentTagId;
+
+                List<TaskTag> existingItems = context.TaskTags
+                    .Where(et => et.StudentTaskId == studentTaskId)
+                    .Where(et => et.StudentTagId == studentTagId)
+                    .ToList();
+
+                if (existingItems.Count == 0)
+                {
+                    TaskTag taskTag = new TaskTag
+                    {
+                        StudentTaskId = studentTaskId,
+                        StudentTagId = studentTagId
+                    };
+
+                    context.TaskTags.Add(taskTag);
+                    context.SaveChanges();
+                }
+
+                return Redirect("/StudentTask/Detail/" + studentTaskId);
+            }
+
+            return View(viewModel);
+        }
     }
 }

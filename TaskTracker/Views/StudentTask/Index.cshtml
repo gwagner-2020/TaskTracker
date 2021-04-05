@@ -31,6 +31,9 @@ else
             <th>
                 Due Date
             </th>
+            <th>
+            See Details
+            </th>
         </tr>
         @foreach (var studentTask in Model)
         {
@@ -39,6 +42,7 @@ else
                 <td>@studentTask.Name</td>
                 <td>@studentTask.Description</td>
                 <td>@studentTask.DueDate</td>
+                <td><a asp-controller="StudentTask" asp-action="Detail" asp-route-id="@studentTask.Id">Click Here</a></td>
             </tr>
         }
 
