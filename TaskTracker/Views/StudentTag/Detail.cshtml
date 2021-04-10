@@ -1,0 +1,17 @@
+﻿@model List<TaskTracker.Models.TaskTag>
+
+@if (Model.Count == 0)
+{
+    <h1>No elements with the given tag</h1>
+}
+else
+{
+    <h1>Tasks Assigned to @Model[0].StudentTag.StudentName</h1>
+
+    <ul>
+        @foreach (var taskTag in Model)
+        {
+            <li>@taskTag.StudentTask.Name</li>
+        }
+    </ul>
+}

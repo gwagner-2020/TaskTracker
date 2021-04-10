@@ -1,0 +1,13 @@
+﻿@model TaskTracker.ViewModels.AddTaskTagViewModel
+
+<h1>Assign Student to Task: @Model.StudentTask.Name</h1>
+
+<form asp-controller="StudentTask" asp-action="AddStudentTag" method="post">
+    <input type="hidden" value="@Model.StudentTask.Id" name="StudentTaskId" />
+    <div class="form-group">
+        <label asp-for="StudentTagId">Select Student:</label>
+        <select asp-for="StudentTagId" asp-items="Model.StudentTags"></select>
+        <span asp-validation-for="StudentTagId"></span>
+    </div>
+    <input type="submit" value="Assign Student" />
+</form>
