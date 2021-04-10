@@ -1,21 +1,21 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-@using TaskTracker.Models
+@*@using TaskTracker.Models
 
-@model List<StudentTag>
+@model List<StudentTag>*@
 
-@*<div class="bg-image d-flex justify-content-center align-items-center"
+<div class="bg-image d-flex justify-content-center align-items-center"
      style="
             background-image: url('https://mdbcdn.b-cdn.net/img/new/fluid/nature/015.jpg');
             height: 100vh;
-            ">*@
+            ">
     
         <h1 class="text-white">Welcome to CampusTasks</h1>
     
 
     
-        <table class="table">
+        @*<table class="table">
             <tr>
                 <th>Select A Student:</th>
             </tr>
@@ -26,8 +26,8 @@
                     <td><a asp-controller="StudentTask" asp-action="Detail" asp-route-id="@tag.Id">@tag.StudentName</a></td>
                 </tr>
             }
-        </table>
+        </table>*@
     
 
 
-@*</div>*@
+</div>

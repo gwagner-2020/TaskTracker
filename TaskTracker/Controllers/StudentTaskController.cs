@@ -28,10 +28,28 @@ namespace TaskTracker.Controllers
         }
         
         [HttpGet]
+        
         public IActionResult Index()
         {
             var currentUserId = userManager.GetUserId(User);
 ;            //studentTasks.Add("Clean Desk");
+             //studentTasks.Add("Monitor Gallery");
+             //ViewBag.studentTasks = StudentTaskData.GetAll();
+             //List<StudentTask> studentTasks = new List<StudentTask>(StudentTaskData.GetAll());
+             //List<StudentTask> studentTasks = context.StudentTasks
+             //.Where(e => e.UserId == currentUserId)
+             //.ToList();
+            List<StudentTag> studentTags = context.StudentTags.ToList();
+
+            return View(studentTags);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult AllTasks()
+        {
+            var currentUserId = userManager.GetUserId(User);
+            ;            //studentTasks.Add("Clean Desk");
             //studentTasks.Add("Monitor Gallery");
             //ViewBag.studentTasks = StudentTaskData.GetAll();
             //List<StudentTask> studentTasks = new List<StudentTask>(StudentTaskData.GetAll());
@@ -72,6 +90,7 @@ namespace TaskTracker.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete()
         {
             //ViewBag.studentTasks = StudentTaskData.GetAll();
@@ -86,6 +105,7 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int[] studentTaskIds)
         {
             foreach(int studentTaskId in studentTaskIds)
@@ -113,7 +133,22 @@ namespace TaskTracker.Controllers
             return View(viewModel);
         }
 
+        public IActionResult DetailStudent(int id)
+        {
+            StudentTask theStudentTask = context.StudentTasks.Single(e => e.Id == id);
+
+            //List<TaskTag> studentNamesText = context.TaskTags
+            //    .Where(et => et.StudentTaskId == id)
+            //    .Include(et => et.StudentTag)
+            //    .ToList();
+
+            DetailStudentTaskViewModel viewModel = new DetailStudentTaskViewModel(theStudentTask);
+
+            return View(viewModel);
+        }
+
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddStudentTag(int id)
         {
             StudentTask studentTask = context.StudentTasks.Find(id);
@@ -125,6 +160,7 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddStudentTag(AddTaskTagViewModel viewModel)
         {
             if (ModelState.IsValid)
