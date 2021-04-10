@@ -119,6 +119,24 @@ namespace TaskTracker.Controllers
             return Redirect("/StudentTask");
         }
 
+        public IActionResult Update(int id)
+        {
+            StudentTask theStudentTask = context.StudentTasks.Single(e => e.Id == id);
+            DetailStudentTaskViewModel viewModel = new DetailStudentTaskViewModel(theStudentTask);
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Update(int id, string name, string description)
+        {
+            StudentTask theStudentTask = context.StudentTasks.Find(id);
+            theStudentTask.Name = name;
+            theStudentTask.Description = description;
+            context.SaveChanges();
+            return Redirect("/StudentTask/AllTasks");
+        }
+
         public IActionResult Detail(int id)
         {
             StudentTask theStudentTask = context.StudentTasks.Single(e => e.Id == id);

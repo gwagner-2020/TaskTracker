@@ -38,7 +38,7 @@
     <a asp-controller="StudentTask" asp-action="AddStudentTag" asp-route-id="@Model.TaskId">Assign Student To Task</a>
 </p>
 <p>
-    <a>Update Task Details</a>
+    <a asp-controller="StudentTask" asp-action="Update" asp-route-id="@Model.TaskId">Update Task Details</a>
 </p>
 <p>
     <a asp-controller="StudentTask" asp-action="AllTasks">All Tasks</a>

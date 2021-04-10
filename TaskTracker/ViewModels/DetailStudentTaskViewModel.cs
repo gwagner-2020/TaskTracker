@@ -43,5 +43,7 @@ namespace TaskTracker.ViewModels
 
             //}
         }
+
+        public DetailStudentTaskViewModel() { }
     }
 }
