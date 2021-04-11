@@ -1,7 +1,7 @@
 ﻿@using TaskTracker.ViewModels
 @model TaskTracker.ViewModels.DetailStudentTaskViewModel
 
-<h1 class="bg-info text-white">Update Student Task</h1>
+<h1>Update Student Task</h1>
 @*<a asp-controller="StudentTask" asp-action="Detail" asp-route-id="@Model.TaskId" class="btn btn-secondary">Back</a>*@
 <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -17,6 +17,18 @@
     <div class="form-group">
         <label asp-for="@Model.Description"></label>
         <input asp-for="@Model.Description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.DueDate">Due Date</label>
+        <input asp-for="@Model.DueDate" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Approved"></label>
+        <input asp-for="@Model.Approved" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.ApproveDate">Date Approved</label>
+        <input asp-for="@Model.ApproveDate" class="form-control" />
     </div>
     <input type="submit" name="Update Task" class="btn btn-danger">
 </form>

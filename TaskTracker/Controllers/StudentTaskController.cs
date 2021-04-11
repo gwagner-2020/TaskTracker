@@ -28,7 +28,6 @@ namespace TaskTracker.Controllers
         }
         
         [HttpGet]
-        
         public IActionResult Index()
         {
             var currentUserId = userManager.GetUserId(User);
@@ -40,12 +39,11 @@ namespace TaskTracker.Controllers
              //.Where(e => e.UserId == currentUserId)
              //.ToList();
             List<StudentTag> studentTags = context.StudentTags.ToList();
-
             return View(studentTags);
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public IActionResult AllTasks()
         {
             var currentUserId = userManager.GetUserId(User);
@@ -61,7 +59,7 @@ namespace TaskTracker.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public IActionResult Add()
         {
             AddStudentTaskViewModel addStudentTaskViewModel = new AddStudentTaskViewModel();
@@ -69,7 +67,7 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public IActionResult Add(AddStudentTaskViewModel addStudentTaskViewModel)
         {
             var currentUserId = userManager.GetUserId(User);
@@ -86,11 +84,11 @@ namespace TaskTracker.Controllers
             context.StudentTasks.Add(newStudentTask);
             context.SaveChanges();
 
-            return Redirect("/StudentTask");
+            return Redirect("/StudentTask/AllTasks");
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public IActionResult Delete()
         {
             //ViewBag.studentTasks = StudentTaskData.GetAll();
@@ -105,7 +103,7 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public IActionResult Delete(int[] studentTaskIds)
         {
             foreach(int studentTaskId in studentTaskIds)
@@ -116,7 +114,7 @@ namespace TaskTracker.Controllers
             }
             context.SaveChanges();
 
-            return Redirect("/StudentTask");
+            return Redirect("/StudentTask/AllTasks");
         }
 
         public IActionResult Update(int id)
@@ -128,11 +126,13 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(int id, string name, string description)
+        public IActionResult Update(int id, string name, string description, DateTime dueDate, Boolean approved )
         {
             StudentTask theStudentTask = context.StudentTasks.Find(id);
             theStudentTask.Name = name;
             theStudentTask.Description = description;
+            theStudentTask.DueDate = dueDate;
+            theStudentTask.Approved = approved;
             context.SaveChanges();
             return Redirect("/StudentTask/AllTasks");
         }
@@ -165,8 +165,17 @@ namespace TaskTracker.Controllers
             return View(viewModel);
         }
 
+        [HttpPost]
+        public IActionResult DetailStudent(int id, DateTime submitDate)
+        {
+            StudentTask theStudentTask = context.StudentTasks.Find(id);
+            theStudentTask.SubmitDate = submitDate;
+            context.SaveChanges();
+            return Redirect("/StudentTask");
+        }
+
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public IActionResult AddStudentTag(int id)
         {
             StudentTask studentTask = context.StudentTasks.Find(id);
@@ -178,7 +187,7 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public IActionResult AddStudentTag(AddTaskTagViewModel viewModel)
         {
             if (ModelState.IsValid)

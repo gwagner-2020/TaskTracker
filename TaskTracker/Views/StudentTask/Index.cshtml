@@ -61,14 +61,14 @@
 
 @model List<StudentTag>
 
-<h2>Select Student Name To See Assigned Tasks:</h2>
-<table class="table">
+<h2>Select Student To View Assigned Tasks:</h2>
+<table class="table table-hover">
     
 
     @foreach (var tag in Model)
     {
         <tr>
-            <td><a asp-controller="StudentTask" asp-action="DetailStudent" asp-route-id="@tag.Id">@tag.StudentName</a></td>
+            <td><a asp-controller="StudentTag" asp-action="Detail" asp-route-id="@tag.Id">@tag.StudentName</a></td>
         </tr>
     }
 </table>

@@ -1,7 +1,7 @@
 ﻿@model string
 
-<h1 class="bg-info text-white">Create a Role</h1>
-<a asp-action="AllRoles" class="btn btn-secondary">Back</a>
+<h1 class="bg-light text-black">Create a Role</h1>
+<a asp-action="AllRoles" class="btn btn-light text-black">Back</a>
 <div asp-validation-summary="All" class="text-danger"></div>
 
 <form asp-action="CreateRole" method="post">
@@ -9,5 +9,5 @@
         <label for="name">Name:</label>
         <input name="name" class="form-control" />
     </div>
-    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="btn btn-light text-black">Create</button>
 </form>

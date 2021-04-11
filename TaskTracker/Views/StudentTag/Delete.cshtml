@@ -1,0 +1,18 @@
+﻿@using TaskTracker.Models
+@model List<StudentTag>
+
+<h1>Delete Student Tag</h1>
+
+<form method="post">
+    @foreach (var studentTag in Model)
+    {
+        <div class="form-group">
+            <label>
+                <span>@studentTag.StudentName</span>
+                <input type="checkbox" name="studentTagIds" value="@studentTag.Id" />
+            </label>
+        </div>
+    }
+    <input type="submit" name="Delete Selected Tags" class="btn btn-light text-black" />
+</form>
+

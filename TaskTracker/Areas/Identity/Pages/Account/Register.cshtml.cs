@@ -52,7 +52,7 @@ namespace TaskTracker.Areas.Identity.Pages.Account
 
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Student Name")]
+            [Display(Name = "Name")]
             public string UserName { get; set; }
 
             [Required]

@@ -25,7 +25,7 @@ namespace TaskTracker.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public IActionResult Index()
         {
 
@@ -33,7 +33,7 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public async Task<IActionResult> DeleteUser(string id)
         {
             IdentityUser user = await userManager.FindByIdAsync(id);
@@ -50,7 +50,7 @@ namespace TaskTracker.Controllers
             return View("Index", userManager.Users);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public async Task<IActionResult> UpdateUser(string id)
         {
             IdentityUser user = await userManager.FindByIdAsync(id);
@@ -61,7 +61,7 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public async Task<IActionResult> UpdateUser(string id, string email, string password)
         {
             IdentityUser user = await userManager.FindByIdAsync(id);
@@ -91,14 +91,14 @@ namespace TaskTracker.Controllers
             return View(user);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public IActionResult AllRoles()
         {
 
             return View(roleManager.Roles);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public IActionResult CreateRole() => View();
 
         private void Errors(IdentityResult result)
@@ -108,7 +108,7 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public async Task<IActionResult> CreateRole([Required] string name)
         {
             if (ModelState.IsValid)
@@ -123,7 +123,7 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public async Task<IActionResult> DeleteRole(string id)
         {
             IdentityRole role = await roleManager.FindByIdAsync(id);
@@ -140,7 +140,7 @@ namespace TaskTracker.Controllers
             return View("AllRoles", roleManager.Roles);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public async Task<IActionResult> Update(string id)
         {
             IdentityRole role = await roleManager.FindByIdAsync(id);
@@ -162,7 +162,7 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public async Task<IActionResult> Update(RoleModification model)
         {
             IdentityResult result;
@@ -196,7 +196,7 @@ namespace TaskTracker.Controllers
                 return await Update(model.RoleId);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administration")]
         public async Task<IActionResult> ShowUsers(string id)
         {
             IdentityRole role = await roleManager.FindByIdAsync(id);

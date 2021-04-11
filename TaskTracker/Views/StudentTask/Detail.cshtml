@@ -1,11 +1,14 @@
 ﻿@using TaskTracker.ViewModels
 @model TaskTracker.ViewModels.DetailStudentTaskViewModel
 
+<p>
+    <a asp-controller="StudentTask" asp-action="AllTasks">Back to All Tasks</a>
+</p>
 
 <table class="table table-bordered">
 
     <tr>
-        <th>Task</th>
+        <th>Task Name</th>
         <td>@Model.Name</td>
     </tr>
 
@@ -15,40 +18,53 @@
     </tr>
     <tr>
         <th>Due Date</th>
-        <td>@Model.DueDate</td>
+        <td>@Model.DueDate.ToShortDateString()</td>
     </tr>
     <tr>
         <th>Date Submitted</th>
-        <td>@Model.SubmitDate</td>
+        <td>@Model.SubmitDate.ToShortDateString()</td>
     </tr>
-    <tr>
-        <th>Date Approved</th>
-        <td>@Model.ApproveDate</td>
-    </tr>
+
     <tr>
         <th>Approved</th>
         <td>@Model.Approved</td>
     </tr>
+    <tr>
+        <th>Date Approved</th>
+        <td>@Model.ApproveDate.ToShortDateString()</td>
+    </tr>
     @*<tr>
-        <th>Students Assigned</th>
-        <td>@Model.StudentNamesText</td>
-    </tr>*@
+            <th>Students Assigned</th>
+            <td>@Model.StudentNamesText</td>
+        </tr>*@
 </table>
-<p>
-    <a asp-controller="StudentTask" asp-action="AddStudentTag" asp-route-id="@Model.TaskId">Assign Student To Task</a>
-</p>
-<p>
-    <a asp-controller="StudentTask" asp-action="Update" asp-route-id="@Model.TaskId">Update Task Details</a>
-</p>
-<p>
-    <a asp-controller="StudentTask" asp-action="AllTasks">All Tasks</a>
-</p>
+
+<table class="table table-bordered">
+    <tr>
+        <td>
+            <p>
+                <a asp-controller="StudentTask" asp-action="AddStudentTag" asp-route-id="@Model.TaskId">Assign Student To Task</a>
+            </p>
+        </td>
+        <td>
+            <p>
+                <a asp-controller="StudentTask" asp-action="Update" asp-route-id="@Model.TaskId">Update Task</a>
+            </p>
+        </td>
+        <td>
+            <p>
+                <a asp-controller="StudentTask" asp-action="Delete">Delete Task</a>
+            </p>
+        </td>
+
+    </tr>
+</table>
 
 
-@*<p>
-    <a asp-controller="StudentTask" asp-action="Add">Add Student Task</a>
-</p>
+    @*<p>
+            <a asp-controller="StudentTask" asp-action="Add">Add Student Task</a>
+        </p>
 
-<p>
-    <a asp-controller="StudentTask" asp-action="Delete">Delete Student Task</a>
-</p>*@
+        <p>
+            <a asp-controller="StudentTask" asp-action="Delete">Delete Student Task</a>
+        </p>*@

@@ -15,20 +15,22 @@ namespace TaskTracker.Controllers
     public class StudentTagController : Controller
     {
         private StudentTaskDbContext context;
-        private IAuthorizationService authorizationService;
-        private UserManager<IdentityUser> userManager;
+        //private IAuthorizationService authorizationService;
+        //private UserManager<IdentityUser> userManager;
 
         public StudentTagController(StudentTaskDbContext dbContext)
         {
             context = dbContext;
         }
 
+        [Authorize(Roles = "Administration")]
         public IActionResult Index()
         {
             List<StudentTag> studentTags = context.StudentTags.ToList();
             return View(studentTags);
         }
 
+        [Authorize(Roles = "Administration")]
         public IActionResult Add()
         {
 
@@ -38,6 +40,7 @@ namespace TaskTracker.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administration")]
         public IActionResult Add(StudentTag studentTag)
         {
             if (ModelState.IsValid)
@@ -48,6 +51,28 @@ namespace TaskTracker.Controllers
             }
 
             return View("Add", studentTag);
+        }
+
+
+        [Authorize(Roles = "Administration")]
+        public IActionResult Delete()
+        {
+            List<StudentTag> studentTags = context.StudentTags.ToList();
+            return View(studentTags);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administration")]
+        public IActionResult Delete(int[] studentTagIds)
+        {
+            foreach(int studentTagId in studentTagIds)
+            {
+                StudentTag theStudentTag = context.StudentTags.Find(studentTagId);
+                context.StudentTags.Remove(theStudentTag);
+            }
+            context.SaveChanges();
+
+            return Redirect("/StudentTag");
         }
 
         public IActionResult Detail(int id)

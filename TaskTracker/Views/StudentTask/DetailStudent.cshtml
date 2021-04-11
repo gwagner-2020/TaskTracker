@@ -1,11 +1,10 @@
 ﻿@using TaskTracker.ViewModels
 @model TaskTracker.ViewModels.DetailStudentTaskViewModel
 
-
 <table class="table table-bordered">
 
     <tr>
-        <th>Task</th>
+        <th>Task Name</th>
         <td>@Model.Name</td>
     </tr>
 
@@ -15,19 +14,26 @@
     </tr>
     <tr>
         <th>Due Date</th>
-        <td>@Model.DueDate</td>
+        <td>@Model.DueDate.ToShortDateString()</td>
     </tr>
     <tr>
-        <th>Date Submitted</th>
-        <td>@Model.SubmitDate</td>
+        <th>Submit Completed Task</th>
+        <td>
+            <form method="post">
+                <div>
+                    <input asp-for="SubmitDate" />
+                </div>
+                <input type="submit" value="Submit Task" />
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <th>Approved By Supervisor</th>
+        <td>@Model.Approved</td>
     </tr>
     <tr>
         <th>Date Approved</th>
-        <td>@Model.ApproveDate</td>
-    </tr>
-    <tr>
-        <th>Approved</th>
-        <td>@Model.Approved</td>
+        <td>@Model.ApproveDate.ToShortDateString()</td>
     </tr>
     @*<tr>
             <th>Students Assigned</th>

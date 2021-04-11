@@ -1,7 +1,7 @@
 ﻿@using TaskTracker.Models
 @model List<StudentTask>
 
-<h1>Task List</h1>
+<h1>Student Tasks</h1>
 
 @if (Model.Count == 0)
 {
@@ -9,53 +9,57 @@
     <p>
         <a asp-controller="StudentTask" asp-action="Add">Add Student Task</a>
     </p>
-
     <p>
-        <a asp-controller="StudentTask" asp-action="Delete">Delete Student Task</a>
+        <a asp-controller="StudentTag" asp-action="Index" data-toggle="tooltip" title="Create and manage student tags required to assign tasks.">Mangage Student Tags</a>
+    </p>
+    <p>
+        <a asp-controller="Administration" asp-action="AllRoles" data-toggle="tooltip" title="Reqstrict webpage access by authorizing users.">Assign Administration Roles</a>
     </p>
 }
 else
 {
-    <table class="table">
-        <tr>
-            <th>
-                ID
-            </th>
-
-            <th>
-                Name
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-                Due Date
-            </th>
-            <th>
-                Details
-            </th>
-        </tr>
-        @foreach (var studentTask in Model)
-        {
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <td>@studentTask.Id</td>
-                <td>@studentTask.Name</td>
-                <td>@studentTask.Description</td>
-                <td>@studentTask.DueDate</td>
-                <td><a asp-controller="StudentTask" asp-action="Detail" asp-route-id="@studentTask.Id">Details</a></td>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Task Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Due Date
+                </th>
+                <th>
+                    Details
+                </th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var studentTask in Model)
+            {
+                <tr>
+                    <td>@studentTask.Id</td>
+                    <td>@studentTask.Name</td>
+                    <td>@studentTask.Description</td>
+                    <td>@studentTask.DueDate.ToShortDateString()</td>
+                    <td><a asp-controller="StudentTask" asp-action="Detail" asp-route-id="@studentTask.Id">Details</a></td>
+                </tr>
+            }
+        </tbody>
 
     </table>
     <p>
         <a asp-controller="StudentTask" asp-action="Add">Add Student Task</a>
     </p>
-
     <p>
-        <a asp-controller="StudentTask" asp-action="Delete">Delete Student Task</a>
+        <a asp-controller="StudentTag" asp-action="Index" data-toggle="tooltip" title="Create and manage student tags required to assign tasks.">Mangage Student Tags</a>
     </p>
     <p>
-        <a asp-controller="Administration" asp-action="AllRoles">Assign Administration Roles</a>
+        <a asp-controller="Administration" asp-action="AllRoles" data-toggle="tooltip" title="Reqstrict webpage access by authorizing users.">Assign Administration Roles</a>
     </p>
 }
 
