@@ -12,6 +12,9 @@ else
         @foreach (var taskTag in Model)
         {
             <li><a asp-controller="StudentTask" asp-action="DetailStudent" asp-route-id="@taskTag.StudentTaskId">@taskTag.StudentTask.Name</a></li>
+            
         }
     </ul>
+
+   
 }

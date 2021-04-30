@@ -19,7 +19,9 @@
     <tr>
         <th>Submit Completed Task</th>
         <td>
-            <form method="post">
+            <form asp-controller="StudentTask" asp-action="DetailStudent" method="post">
+                <input type="hidden" value="@Model.StudentTagId" name="studentTagId" />
+                <input type="hidden" value="@Model.StudentTaskId" name="studentTaskId" />
                 <div>
                     <input asp-for="SubmitDate" />
                 </div>

@@ -20,8 +20,8 @@ namespace TaskTracker.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TaskTag>()
-                .HasKey(et => new { et.StudentTaskId, et.StudentTagId });
+            modelBuilder.Entity<TaskTag>() 
+               .HasKey(et => new { et.StudentTaskId, et.StudentTagId, });
 
             base.OnModelCreating(modelBuilder);
         }

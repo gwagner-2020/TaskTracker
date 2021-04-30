@@ -18,7 +18,11 @@ namespace TaskTracker.ViewModels
 
         public Boolean Approved { get; set; }
 
-        //public string StudentNamesText { get; set; }
+        public int StudentTagId { get; set; }
+
+        public int StudentTaskId { get; set; }
+
+        public string StudentNamesText { get; set; }
 
         public DetailStudentTaskViewModel(StudentTask studentTask)
         {
@@ -30,18 +34,33 @@ namespace TaskTracker.ViewModels
             this.ApproveDate = studentTask.ApproveDate;
             this.Approved = studentTask.Approved;
 
-            //this.StudentNamesText = "";
 
-            //for (var i = 0; i < taskTags.Count; i++)
-            //{
-            //    StudentNamesText += taskTags[i].StudentTag.StudentName;
+        }
 
-            //    if (i < taskTags.Count - 1)
-            //    {
-            //        StudentNamesText += ", ";
-            //    }
+        public DetailStudentTaskViewModel(StudentTask studentTask, List<TaskTag> taskTags)
+        {
+            this.TaskId = studentTask.Id;
+            //this.StudentTagId = studentTag.Id;
+            //this.StudentTaskId = studentTask.Id;
+            this.Name = studentTask.Name;
+            this.Description = studentTask.Description;
+            this.DueDate = studentTask.DueDate;
+            this.SubmitDate = studentTask.SubmitDate;
+            this.ApproveDate = studentTask.ApproveDate;
+            this.Approved = studentTask.Approved;
 
-            //}
+            this.StudentNamesText = "";
+
+            for (var i = 0; i < taskTags.Count; i++)
+            {
+                StudentNamesText += taskTags[i].StudentTag.StudentName;
+
+                if (i < taskTags.Count - 1)
+                {
+                    StudentNamesText += ", ";
+                }
+
+            }
         }
 
         public DetailStudentTaskViewModel() { }

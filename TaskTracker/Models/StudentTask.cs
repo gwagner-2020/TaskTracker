@@ -21,10 +21,13 @@ namespace TaskTracker.Models
         public int Id { get; set; }
         //private static int nextId = 1;
 
+       
+
         public StudentTask()
         {
             //Id = nextId;
             //nextId++;
+        
         }
         
         public StudentTask(string name, string description, DateTime dueDate) //: this()

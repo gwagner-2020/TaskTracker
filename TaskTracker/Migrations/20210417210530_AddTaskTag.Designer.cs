@@ -9,7 +9,7 @@ using TaskTracker.Data;
 namespace TaskTracker.Migrations
 {
     [DbContext(typeof(StudentTaskDbContext))]
-    [Migration("20210329225907_AddTaskTag")]
+    [Migration("20210417210530_AddTaskTag")]
     partial class AddTaskTag
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -268,6 +268,18 @@ namespace TaskTracker.Migrations
 
                     b.Property<int>("StudentTagId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("ApproveDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("Approved")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("DueDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("SubmitDate")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("StudentTaskId", "StudentTagId");
 

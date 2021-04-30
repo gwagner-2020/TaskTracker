@@ -33,10 +33,10 @@
         <th>Date Approved</th>
         <td>@Model.ApproveDate.ToShortDateString()</td>
     </tr>
-    @*<tr>
-            <th>Students Assigned</th>
+    <tr>
+            <th>Student Assigned</th>
             <td>@Model.StudentNamesText</td>
-        </tr>*@
+    </tr>
 </table>
 
 <table class="table table-bordered">
@@ -49,6 +49,11 @@
         <td>
             <p>
                 <a asp-controller="StudentTask" asp-action="Update" asp-route-id="@Model.TaskId">Update Task</a>
+            </p>
+        </td>
+        <td>
+            <p>
+                <a asp-controller="StudentTask" asp-action="Duplicate" asp-route-id="@Model.TaskId">Duplicate Task</a>
             </p>
         </td>
         <td>

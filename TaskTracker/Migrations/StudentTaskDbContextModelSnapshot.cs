@@ -267,6 +267,18 @@ namespace TaskTracker.Migrations
                     b.Property<int>("StudentTagId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("ApproveDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("Approved")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("DueDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("SubmitDate")
+                        .HasColumnType("datetime(6)");
+
                     b.HasKey("StudentTaskId", "StudentTagId");
 
                     b.HasIndex("StudentTagId");
